@@ -2,9 +2,30 @@
 
 namespace LiamW\AllRichUsernames\XF\Template;
 
+use XF\App;
+use XF\Language;
+
 class Templater extends XFCP_Templater
 {
 	protected $displayGroupIds = [];
+
+	public function addDefaultHandlers()
+	{
+		parent::addDefaultHandlers();
+
+		$this->addFunction('liamwcopyright', function ($templater, &$escape) {
+			if (!empty($this->app->fnLiamWCopyright))
+			{
+				return '';
+			}
+
+			$escape = false;
+
+			$this->app->liamwCopyrightShown = true;
+
+			return '<a href="https://lw-addons.net" class="u-concealed" dir="ltr" style="display: block">Certain add-ons by LW Addons <span class="copyright">&copy;2017 Liam Williams.</span></a>';
+		});
+	}
 
 	public function fnUsernameClasses($templater, &$escape, $user, $includeGroupStyling = true)
 	{
@@ -26,7 +47,8 @@ class Templater extends XFCP_Templater
 	{
 		if (!isset($this->displayGroupIds[$userId]))
 		{
-			$displayGroupId = \XF::db()->fetchOne("SELECT display_style_group_id FROM xf_user WHERE user_id=?", $userId);
+			$displayGroupId = \XF::db()
+				->fetchOne("SELECT display_style_group_id FROM xf_user WHERE user_id=?", $userId);
 			$this->displayGroupIds[$userId] = $displayGroupId;
 		}
 
