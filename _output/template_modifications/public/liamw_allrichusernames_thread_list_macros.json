@@ -1,0 +1,9 @@
+{
+    "template": "thread_list_macros",
+    "description": "",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<li>{{ phrase('latest_x', {'name': $thread.last_post_cache.username}) }}</li>",
+    "replace": "<li>{{ phrase('latest_x', {'name': username_link($thread.LastPoster)}) }}</li>"
+}

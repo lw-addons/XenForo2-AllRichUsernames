@@ -1,0 +1,9 @@
+{
+    "template": "xfrm_resource_list_macros",
+    "description": "",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<li>{{ $resource.User.username ?: $resource.username }}</li>",
+    "replace": "<li>{{ username_link($resource.User, {'defaultname': $resource.username}) }}</li>"
+}
