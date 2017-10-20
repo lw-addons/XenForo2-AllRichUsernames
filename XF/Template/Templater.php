@@ -14,16 +14,16 @@ class Templater extends XFCP_Templater
 		parent::addDefaultHandlers();
 
 		$this->addFunction('liamwcopyright', function ($templater, &$escape) {
-			if (!empty($this->app->fnLiamWCopyright))
+			if (\XF::app()->offsetExists('liamwCopyrightShown') && \XF::app()->liamwCopyrightShown === true)
 			{
 				return '';
 			}
 
 			$escape = false;
 
-			$this->app->liamwCopyrightShown = true;
+			\XF::app()->liamwCopyrightShown = true;
 
-			return '<a href="https://lw-addons.net" class="u-concealed" dir="ltr" style="display: block">Certain add-ons by LW Addons <span class="copyright">&copy;2017 Liam Williams.</span></a>';
+			return '<a href="https://lw-addons.net" class="u-concealed" dir="ltr" style="display: block">Certain add-on functionality by LW Addons <span class="copyright">&copy;2017 Liam Williams.</span></a>';
 		});
 	}
 
