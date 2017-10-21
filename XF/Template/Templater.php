@@ -13,7 +13,7 @@ class Templater extends XFCP_Templater
 	{
 		parent::addDefaultHandlers();
 
-		$this->addFunction('liamwcopyright', function ($templater, &$escape) {
+		$this->addFunction('liamwcopyright', function ($templater, &$escape, $addOnCampaign = null) {
 			if (\XF::app()->offsetExists('liamwCopyrightShown') && \XF::app()->liamwCopyrightShown === true)
 			{
 				return '';
@@ -23,7 +23,9 @@ class Templater extends XFCP_Templater
 
 			\XF::app()->liamwCopyrightShown = true;
 
-			return '<a href="https://lw-addons.net" class="u-concealed" dir="ltr" style="display: block">Certain add-on functionality by LW Addons <span class="copyright">&copy;2017 Liam Williams.</span></a>';
+			$campaignString = "LWA-Branding--" . ($addOnCampaign ?: 'Other');
+
+			return "<a href=\"https://lw-addons.net/#pk_campaign=$campaignString\" class=\"u-concealed\" dir=\"ltr\" style=\"display: block\">Certain add-on functionality by LW Addons <span class=\"copyright\">&copy;2017 Liam Williams.</span></a>";
 		});
 	}
 
