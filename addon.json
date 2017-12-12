@@ -1,14 +1,16 @@
 {
     "legacy_addon_id": "liam_allrich",
     "title": "All Rich Usernames",
-    "description": "",
-    "version_id": 2000033,
-    "version_string": "2.0.0 Beta 3",
-    "dev": "",
-    "dev_url": "",
+    "description": "Makes usergroup styling apply in all places.",
+    "version_id": 2000070,
+    "version_string": "2.0.0",
+    "dev": "LW Addons (Liam Williams)",
+    "dev_url": "https://lw-addons.net",
     "faq_url": "",
-    "support_url": "",
-    "extra_urls": [],
+    "support_url": "https://xenforo.com/community/threads/all-rich-usernames.135911/",
+    "extra_urls": {
+        "Contribute on GitHub": "https://github.com/lw-addons/XenForo2-AllRichUsernames"
+    },
     "require": [],
     "icon": ""
 }
