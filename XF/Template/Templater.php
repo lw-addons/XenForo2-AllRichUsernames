@@ -2,8 +2,7 @@
 
 namespace LiamW\AllRichUsernames\XF\Template;
 
-use XF\App;
-use XF\Language;
+use XF\Entity\User;
 
 class Templater extends XFCP_Templater
 {
@@ -13,9 +12,18 @@ class Templater extends XFCP_Templater
 	{
 		$includeGroupStyling = true;
 
+		/** @var User $user */
+
 		if (empty($user['display_style_group_id']))
 		{
-			$user['display_style_group_id'] = $this->getDisplayStyleGroupIdFromCache($user['user_id']);
+			if ($user instanceof User)
+			{
+				$user->setAsSaved('display_style_group_id', $this->getDisplayStyleGroupIdFromCache($user['user_id']));
+			}
+			else
+			{
+				$user['display_style_group_id'] = $this->getDisplayStyleGroupIdFromCache($user['user_id']);
+			}
 		}
 		else
 		{
@@ -29,8 +37,7 @@ class Templater extends XFCP_Templater
 	{
 		if (!isset($this->displayGroupIds[$userId]))
 		{
-			$displayGroupId = \XF::db()
-				->fetchOne("SELECT display_style_group_id FROM xf_user WHERE user_id=?", $userId);
+			$displayGroupId = \XF::db()->fetchOne("SELECT display_style_group_id FROM xf_user WHERE user_id=?", $userId);
 			$this->displayGroupIds[$userId] = $displayGroupId;
 		}
 
